@@ -42,27 +42,31 @@ public class DataInitializer implements ApplicationRunner {
                 // Seed Information if empty
                 if (informationRepository.count() == 0) {
                         Information info = new Information();
-                        info.setName("Alex Johnson");
-                        info.setTitle("Full-Stack Developer & Software Engineer");
-                        info.setHeadline("I build high-performance web applications that make an impact.");
+                        info.setName("Pav Khemerak");
+                        info.setTitle("Full-Stack Developer & Security Analyst");
+                        info.setHeadline(
+                                        "Full-Stack Developer & Cybersecurity Analyst: Building Scalable Apps with a Security-First Mindset.");
                         info.setAboutMe(
-                                        "Hi, I'm Alex — a passionate Full-Stack Developer with 5+ years of experience crafting "
+                                        "I am a Full-Stack Developer and Cybersecurity Analyst with a Bachelor of Computer Science "
                                                         +
-                                                        "scalable, production-grade applications. I specialize in Java/Spring Boot on the backend "
+                                                        "from the Royal University of Phnom Penh. With over a year of experience in IT infrastructure "
                                                         +
-                                                        "and modern JS frameworks on the frontend. I love solving hard problems, writing clean code, "
+                                                        "and security, I specialize in building robust applications using Java, Python, and ReactJS. "
                                                         +
-                                                        "and delivering beautiful user experiences.");
-                        info.setProfileImageUrl("https://avatars.githubusercontent.com/u/583231?v=4");
-                        info.setCvUrl("#");
-                        info.setGithubUrl("https://github.com");
-                        info.setLinkedinUrl("https://linkedin.com");
-                        info.setTwitterUrl("https://twitter.com");
-                        info.setEmail("alex@example.com");
-                        info.setLocation("San Francisco, CA");
-                        info.setExperienceYears(5);
+                                                        "My background in CCNA-level networking and AWS Cloud foundations allows me to develop with a "
+                                                        +
+                                                        "'security-first' mindset, ensuring that every line of code is as scalable as it is secure.");
+                        info.setProfileImageUrl(
+                                        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages8.alphacoders.com%2F138%2Fthumb-1920-1385278.png&f=1&nofb=1&ipt=f57a21743c8aad1fd9222068cad3312dd74274afecf3cba2b9ffb8eccaddec26");
+                        info.setCvUrl("https://drive.google.com/file/d/1Kn32FuWFrBRydb1zZ18uNimmJkyKhfei/view?usp=sharing");
+                        info.setGithubUrl("https://github.com/khemerak");
+                        info.setLinkedinUrl("https://www.linkedin.com/in/pav-khemerak-6b7270269/");
+                        info.setTwitterUrl("https://x.com/pavkhemerak");
+                        info.setEmail("pavkhemerak.official@gmail.com");
+                        info.setLocation("Phnom Penh, Cambodia");
+                        info.setExperienceYears(1);
                         info.setCurrentStatus("Open to Opportunities");
-                        info.setEducation("B.S. Computer Science");
+                        info.setEducation("Bachelor Degree of Computer Science");
                         informationRepository.save(info);
                 }
 

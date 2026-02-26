@@ -55,7 +55,18 @@ public class AdminController {
         // ── Save Site Info ─────────────────────────────────────────
         @PostMapping("/info")
         public String saveInfo(@ModelAttribute Information formInfo,
+                        @RequestParam(value = "experienceYears", required = false) String experienceYearsStr,
                         RedirectAttributes redirectAttributes) {
+                // Manually parse experienceYears to avoid binding error on empty string
+                if (experienceYearsStr != null && !experienceYearsStr.isBlank()) {
+                        try {
+                                formInfo.setExperienceYears(Integer.parseInt(experienceYearsStr.trim()));
+                        } catch (NumberFormatException ignored) {
+                                formInfo.setExperienceYears(null);
+                        }
+                } else {
+                        formInfo.setExperienceYears(null);
+                }
                 Information existing = informationRepository.findAll()
                                 .stream().findFirst().orElse(new Information());
 
@@ -82,7 +93,18 @@ public class AdminController {
         // ── Add / Save Project ─────────────────────────────────────
         @PostMapping("/projects/save")
         public String saveProject(@ModelAttribute Project project,
+                        @RequestParam(value = "displayOrder", required = false) String displayOrderStr,
                         RedirectAttributes redirectAttributes) {
+                // Manually parse displayOrder to avoid binding error on empty string
+                if (displayOrderStr != null && !displayOrderStr.isBlank()) {
+                        try {
+                                project.setDisplayOrder(Integer.parseInt(displayOrderStr.trim()));
+                        } catch (NumberFormatException ignored) {
+                                project.setDisplayOrder(null);
+                        }
+                } else {
+                        project.setDisplayOrder(null);
+                }
 
                 if (project.getId() != null && project.getId() > 0) {
                         // Edit Mode: Fetch existing and apply updates

@@ -88,6 +88,7 @@ To personalize your portfolio, log into the admin dashboard and update:
 
 1. **Your name & title** in the "Site Information" form
 2. **About Me** text
+3. **Experience, Location, Status, and Education** fields in the About & Hero sections
 3. **Profile image** URL (use any publicly accessible image URL)
 4. **Social links** (GitHub, LinkedIn, Twitter)
 5. **Projects** — add your real projects with descriptions and tech tags
