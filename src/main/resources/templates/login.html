@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Login | Portfolio</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <div class="login-page">
+        <div class="login-card">
+            <div class="login-logo">&#128274; Admin Panel</div>
+            <p class="login-sub">Sign in to manage your portfolio</p>
+
+            <!-- Error -->
+            <div class="login-error" th:if="${param.error}">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Invalid username or password. Please try again.
+            </div>
+
+            <!-- Logout confirmation -->
+            <div class="alert-success" th:if="${param.logout}">
+                <i class="fa-solid fa-check-circle"></i>
+                You have been logged out successfully.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="username">
+                        <i class="fa-solid fa-user"></i> Username
+                    </label>
+                    <input class="form-input" type="text" id="username" name="username" placeholder="admin"
+                        autocomplete="username" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">
+                        <i class="fa-solid fa-lock"></i> Password
+                    </label>
+                    <input class="form-input" type="password" id="password" name="password" placeholder="••••••••"
+                        autocomplete="current-password" required />
+                </div>
+                <button type="submit" class="btn-login-submit">
+                    Sign In <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="login-back">
+                <a th:href="@{/}"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

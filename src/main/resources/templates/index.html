@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" th:content="${info.headline ?: 'Personal portfolio website'}" />
+  <title th:text="${info.name != null ? info.name + ' | Portfolio' : 'Portfolio'}">Portfolio</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" />
+</head>
+
+<body>
+
+  <!-- ══ NAVIGATION ══ -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-brand" th:text="${info.name ?: 'Portfolio'}">Portfolio</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <a th:href="@{/admin/dashboard}" class="btn-login" sec:authorize="isAuthenticated()">Dashboard</a>
+        <a th:href="@{/login}" class="btn-login" sec:authorize="isAnonymous()">Admin Login</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ══ HERO ══ -->
+    <section id="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Available for hire
+          </div>
+          <h1 class="hero-name">
+            <span class="hero-name-gradient" th:text="${info.name ?: 'Your Name'}">Your Name</span>
+          </h1>
+          <p class="hero-title" th:text="${info.title ?: 'Full-Stack Developer'}">Full-Stack Developer</p>
+          <p class="hero-headline" th:text="${info.headline ?: 'Building high-performance web applications.'}">
+            Building high-performance web applications.
+          </p>
+          <div class="hero-actions">
+            <a th:href="${info.cvUrl ?: '#'}" class="btn btn-primary" download>
+              <i class="fa-solid fa-download"></i> Download CV
+            </a>
+            <a href="#projects" class="btn btn-outline">
+              <i class="fa-solid fa-rocket"></i> View Projects
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number"
+                th:text="${info.experienceYears != null ? info.experienceYears + '+' : '5+'}">5+</span>
+              <span class="stat-label">Years Exp.</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" th:text="${projects != null ? projects.size() : 0} + '+'">4+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Passion</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-avatar-wrapper">
+          <div class="hero-avatar-ring">
+            <img class="hero-avatar"
+              th:src="${info.profileImageUrl ?: 'https://ui-avatars.com/api/?name=Alex+Johnson&size=320&background=7c3aed&color=fff'}"
+              th:alt="${info.name ?: 'Profile photo'}" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ABOUT ══ -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="fade-up">
+            <span class="section-tag">Who I Am</span>
+            <div class="section-divider"></div>
+            <h2 class="section-title">About Me</h2>
+            <p class="about-text" th:text="${info.aboutMe ?: 'Tell your story here.'}">
+              Tell your story here.
+            </p>
+            <div class="about-skills">
+              <span class="skill-tag">Spring Boot</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Kubernetes</span>
+              <span class="skill-tag">AWS</span>
+            </div>
+          </div>
+          <div class="fade-up">
+            <div class="about-card">
+              <div class="about-card-item">
+                <div class="about-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <div class="about-card-label">Location</div>
+                  <div class="about-card-value" th:text="${info.location ?: 'San Francisco, CA'}">San Francisco, CA
+                  </div>
+                </div>
+              </div>
+              <div class="about-card-item">
+                <div class="about-card-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <div class="about-card-label">Email</div>
+                  <div class="about-card-value" th:text="${info.email ?: 'hello@example.com'}">hello@example.com</div>
+                </div>
+              </div>
+              <div class="about-card-item">
+                <div class="about-card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <div>
+                  <div class="about-card-label">Status</div>
+                  <div class="about-card-value" th:text="${info.currentStatus ?: 'Open to Opportunities'}">Open to
+                    Opportunities</div>
+                </div>
+              </div>
+              <div class="about-card-item">
+                <div class="about-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div>
+                  <div class="about-card-label">Education</div>
+                  <div class="about-card-value" th:text="${info.education ?: 'B.S. Computer Science'}">B.S. Computer
+                    Science</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PROJECTS ══ -->
+    <section id="projects">
+      <div class="container">
+        <div class="fade-up" style="margin-bottom: 3.5rem;">
+          <span class="section-tag">What I've Built</span>
+          <div class="section-divider"></div>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">
+            A collection of work I'm proud of — from enterprise APIs to AI-powered apps.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <div th:if="${#lists.isEmpty(projects)}" class="projects-empty">
+            <i class="fa-solid fa-box-open" style="font-size: 2.5rem; margin-bottom: 1rem; display: block;"></i>
+            No projects yet. Add some from the admin dashboard!
+          </div>
+
+          <div class="project-card fade-up" th:each="project : ${projects}">
+            <img th:if="${project.imageUrl != null and !project.imageUrl.isBlank()}" th:src="${project.imageUrl}"
+              th:alt="${project.title}" class="project-image" loading="lazy" />
+            <div th:unless="${project.imageUrl != null and !project.imageUrl.isBlank()}"
+              class="project-image-placeholder">&#128187;</div>
+
+            <div class="project-body">
+              <h3 class="project-title" th:text="${project.title}">Project Title</h3>
+              <p class="project-description" th:text="${project.description}">Description</p>
+              <div class="project-tags">
+                <span class="tech-tag" th:each="tag : ${project.techTagArray}"
+                  th:text="${#strings.trim(tag)}">Tag</span>
+              </div>
+              <a th:if="${project.projectUrl != null and !project.projectUrl.isBlank() and project.projectUrl != '#'}"
+                th:href="${project.projectUrl}" class="project-link" target="_blank" rel="noopener noreferrer">
+                View Project
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CONTACT ══ -->
+    <section id="contact">
+      <div class="container fade-up">
+        <span class="section-tag">Get In Touch</span>
+        <div class="section-divider"></div>
+        <h2 class="section-title" style="margin-bottom: 1rem;">Let's Work Together</h2>
+        <p class="section-subtitle" style="margin: 0 auto 2rem; text-align: center;">
+          Have a project in mind? I'd love to hear about it. Drop me a line and let's make something great.
+        </p>
+        <a th:href="'mailto:' + ${info.email ?: 'hello@example.com'}" class="contact-email"
+          th:text="${info.email ?: 'hello@example.com'}">hello@example.com</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-copy">
+      &copy; 2025 <span th:text="${info.name ?: 'Portfolio'}">Portfolio</span>. Built with Spring Boot &amp; &#10084;
+    </div>
+    <div class="footer-social">
+      <a th:if="${info.githubUrl != null}" th:href="${info.githubUrl}" class="social-icon" target="_blank"
+        rel="noopener" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a th:if="${info.linkedinUrl != null}" th:href="${info.linkedinUrl}" class="social-icon" target="_blank"
+        rel="noopener" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a th:if="${info.twitterUrl != null}" th:href="${info.twitterUrl}" class="social-icon" target="_blank"
+        rel="noopener" aria-label="Twitter">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a th:if="${info.email != null}" th:href="'mailto:' + ${info.email}" class="social-icon" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
